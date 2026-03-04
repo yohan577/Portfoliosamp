@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hire Me | JOHN LORENZO</title>
+    <style>
+        /* --- THEME VARIABLES --- */
+        :root {
+            --netflix-red: #e50914;
+            --bg-black: #141414;
+            --card-grey: rgba(24, 24, 24, 0.9);
+            --text-white: #ffffff;
+            --text-grey: #a3a3a3;
+            --linkedin-blue: #0077b5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-black);
+            background-image: 
+                linear-gradient(to bottom, rgba(20, 20, 20, 0.85) 0%, rgba(20, 20, 20, 0.95) 100%),
+                url('https://assets.nflxext.com/ffe/siteui/vlv3/f841d4c7-10e1-40af-bca1-07e3f8eb14b8/web/PH-en-20220502-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: var(--text-white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-top: 100px;
+        }
+
+        /* --- NETFLIX NAVBAR --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 4%;
+            z-index: 1000;
+            transition: background-color 0.5s ease;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0));
+        }
+
+        .navbar.scrolled { background-color: var(--bg-black); }
+
+        .nav-logo {
+            color: var(--netflix-red);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--text-grey); }
+
+        /* --- PROFILE CARD --- */
+        .hire-container {
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .profile-card {
+            background: var(--card-grey);
+            padding: 40px;
+            border-radius: 12px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            text-align: left;
+            margin-bottom: 40px;
+            transition: transform 0.4s ease;
+        }
+
+        .profile-card:hover { transform: scale(1.02); }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--text-grey);
+        }
+
+        .profile-info h2 { font-size: 1.5rem; margin-bottom: 5px; }
+        .profile-info h3 { font-size: 1rem; color: var(--text-grey); font-weight: normal; margin-bottom: 15px; }
+        .profile-info p { font-size: 0.9rem; line-height: 1.5; color: #d2d2d2; }
+
+        /* --- CONTACT BUTTONS --- */
+        .btn-linkedin {
+            display: inline-flex;
+            align-items: center;
+            background: var(--linkedin-blue);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #efefef;
+        }
+
+        .contact-pill {
+            background: rgba(40, 40, 40, 0.8);
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .contact-pill:hover {
+            background: rgba(60, 60, 60, 0.9);
+            border-color: var(--netflix-red);
+        }
+
+        .icon-red { color: var(--netflix-red); font-size: 1.2rem; }
+
+        .coffee-footer {
+            margin-top: 50px;
+            font-size: 1.1rem;
+            color: var(--text-grey);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 600px) {
+            .profile-card { flex-direction: column; text-align: center; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="mainNav">
+        <a href="#" class="nav-logo">JOHN LORENZO</a>
+        <ul class="nav-links">
+            <li><a href="menu.html">Home</a></li>
+            <li><a href="professional.html">Education</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="#" style="font-weight: bold; color: var(--netflix-red);">Hire Me</a></li>
+        </ul>
+    </nav>
+
+    <div class="hire-container">
+        <div class="profile-card">
+            <img src="https://yohan577.github.io/BELLA-LUNA-RESTAURANT/images/lorenzo.jpg" alt="John Lorenzo" class="profile-img">
+            <div class="profile-info">
+                <h2>John Lorenzo</h2>
+                <h3>Student Developer</h3>
+                <p>Passionate about coding, Cisco networking, and hardware. Dedicated to building innovative solutions and growing through academic and professional challenges.</p>
+                <a href="https://www.instagram.com/austriajohnlorenzo/" class="btn-linkedin">View Profile</a>
+            </div>
+        </div>
+
+        <p class="cta-text">I'm always up for a chat or a coffee! Feel free to reach out.</p>
+
+        <a href="mailto:johnlorenzo00@gmail.com" class="contact-pill">
+            <span class="icon-red">✉</span> johnlorenzo00@gmail.com
+        </a>
+
+        <br>
+
+        <a href="tel:+630000000000" class="contact-pill">
+            <span class="icon-red">📞</span> +63 000 000 0000
+        </a>
+
+        <p class="coffee-footer">Or catch up over a coffee ☕ 🍩</p>
+    </div>
+
+    <script>
+        const nav = document.getElementById('mainNav');
+        window.onscroll = function() {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> JOHN LORENZO | Technical Skills </title>
+    <style>
+        /* --- GLOBAL & NETFLIX THEME --- */
+        :root {
+            --netflix-red: #e50914; /* The signature vibrant red */
+            --bg-black: #141414;
+            --text-white: #ffffff;
+            --text-grey: #a3a3a3;
+            /* Semi-transparent background for modern cinematic feel */
+            --card-bg: rgba(24, 24, 24, 0.85); 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-black);
+            /* Cinematic high-quality movie grid background with dark vignette overlay */
+            background-image: 
+                linear-gradient(to bottom, rgba(20, 20, 20, 0.7) 0%, rgba(20, 20, 20, 0.9) 100%),
+                url('https://assets.nflxext.com/ffe/siteui/vlv3/f841d4c7-10e1-40af-bca1-07e3f8eb14b8/web/PH-en-20220502-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: var(--text-white);
+            padding: 120px 0 80px 0; /* Adjusted for sticky nav */
+            overflow-x: hidden;
+        }
+
+        /* --- NETFLIX NAVBAR --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 4%;
+            z-index: 1000;
+            transition: background-color 0.5s ease;
+            /* Initial transparent gradient */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0));
+        }
+
+        /* Class added via JS on scroll */
+        .navbar.scrolled {
+            background-color: var(--bg-black);
+        }
+
+        .nav-logo {
+            color: var(--netflix-red);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-grey);
+        }
+
+        /* --- SKILLS SECTION --- */
+        .skills-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 4%;
+        }
+
+        .section-header h1 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        }
+
+        /* --- CATEGORY GROUPING --- */
+        .skill-category {
+            margin-bottom: 50px;
+            opacity: 0; /* Hidden for scroll animation */
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        /* Class added by JS to trigger animation */
+        .skill-category.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-title {
+            font-size: 1.6rem;
+            color: var(--text-white);
+            margin-bottom: 25px;
+            border-left: 5px solid var(--netflix-red);
+            padding-left: 15px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+        }
+
+        /* --- SKILL GRID --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* --- SKILL CARD (STATIC STATE) --- */
+        .skill-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            border: 1px solid rgba(255, 255, 255, 0.05); /* Subtle starting border */
+            
+            /* The 'pop-out' transition properties */
+            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            cursor: default;
+        }
+
+        /* The skill name/logo will be a prominent red */
+        .skill-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--netflix-red); /* Title color is red */
+            margin-bottom: 10px;
+        }
+
+        .skill-desc {
+            font-size: 0.9rem;
+            color: var(--text-grey);
+            line-height: 1.4;
+        }
+
+        /* --- NETFLIX HOVER EFFECT --- */
+        .skill-card:hover {
+            transform: scale(1.08); /* Scale up like a movie poster */
+            border-color: var(--netflix-red); /* Border color turns red on hover */
+            /* Strong red 'active' glow */
+            box-shadow: 0 15px 40px rgba(229, 9, 20, 0.5); 
+        }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media screen and (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .nav-links { display: none; } /* Hide links on mobile for cleaner look */
+            .section-header h1 { font-size: 2.2rem; }
+            .skills-grid { grid-template-columns: 1fr; }
+            body { padding-top: 100px; padding-bottom: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="mainNav">
+        <a href="#" class="nav-logo">JOHN LORENZO</a>
+        <ul class="nav-links">
+            <li><a href="menu.html">Home</a></li>
+            <li><a href="professional.html">Education</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="hireme.html">Hire Me</a></li>
+        </ul>
+    </nav>
+    <section class="skills-section">
+        <div class="section-header">
+            <h1>Technical Skills</h1>
+        </div>
+
+        <div class="skill-category">
+            <h2 class="category-title">Backend Development</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-name">Ruby on Rails</div>
+                    <p class="skill-desc">Backend Framework</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Node.js</div>
+                    <p class="skill-desc">Backend Runtime</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Java</div>
+                    <p class="skill-desc">Object Oriented Programming Language</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">SpringBoot</div>
+                    <p class="skill-desc">Java Framework</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">PHP</div>
+                    <p class="skill-desc">Backend Language</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h2 class="category-title">Cloud & DevOps</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-name">AWS</div>
+                    <p class="skill-desc">Cloud Platform</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">CI/CD</div>
+                    <p class="skill-desc">Continuous Integration & Delivery</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Docker</div>
+                    <p class="skill-desc">Containerization</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Kubernetes</div>
+                    <p class="skill-desc">Container Orchestration</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">GCP</div>
+                    <p class="skill-desc">Google Cloud Platform</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Heroku</div>
+                    <p class="skill-desc">Cloud Platform for Apps</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Netlify</div>
+                    <p class="skill-desc">Frontend Deployment Platform</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h2 class="category-title">Databases</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-name">PostgreSQL</div>
+                    <p class="skill-desc">Relational Database</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">MySQL</div>
+                    <p class="skill-desc">Relational Database</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h2 class="category-title">Frontend Development</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-name">React</div>
+                    <p class="skill-desc">Frontend Framework</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">JavaScript</div>
+                    <p class="skill-desc">Scripting Language</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">TypeScript</div>
+                    <p class="skill-desc">Type-safe JavaScript</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">HTML & CSS</div>
+                    <p class="skill-desc">Web Markups and Styling</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="skill-category">
+            <h2 class="category-title">Tools & Practices</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-name">Agile</div>
+                    <p class="skill-desc">Development Methodology</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-name">Containerization</div>
+                    <p class="skill-desc">Container Management</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <script>
+        // Navbar Scroll Logic
+        const nav = document.getElementById('mainNav');
+        window.onscroll = function() {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        };
+
+        // Skill Category Animation Logic
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-category').forEach(category => {
+            observer.observe(category);
+        });
+    </script>
+</body>
+</html>

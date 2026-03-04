@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience & Education | JOHN LORENZO </title>
+    <style>
+        /* --- THEME VARIABLES --- */
+        :root {
+            --netflix-red: #e50914;
+            --bg-black: #141414;
+            --card-grey: rgba(24, 24, 24, 0.9); 
+            --text-white: #ffffff;
+            --text-grey: #a3a3a3;
+            --swansea-maroon: #850303;
+            --swansea-gold: #c5a059;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-black);
+            background-image: 
+                linear-gradient(to bottom, rgba(20, 20, 20, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%),
+                url('https://assets.nflxext.com/ffe/siteui/vlv3/f841d4c7-10e1-40af-bca1-07e3f8eb14b8/web/PH-en-20220502-popsignuptwoweeks-perspective_alpha_website_large.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: var(--text-white);
+            padding: 120px 0 80px 0; /* Adjusted top padding for Nav */
+            overflow-x: hidden;
+        }
+
+        /* --- NETFLIX NAVBAR --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 4%;
+            z-index: 1000;
+            transition: background-color 0.5s ease;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 10%, rgba(0,0,0,0));
+        }
+
+        /* Class added via JS on scroll */
+        .navbar.scrolled {
+            background-color: var(--bg-black);
+        }
+
+        .nav-logo {
+            color: var(--netflix-red);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-grey);
+        }
+
+        /* --- EXPERIENCE SECTION --- */
+        .experience-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 4%;
+        }
+
+        .section-header h1 {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+
+        /* --- TIMELINE --- */
+        .timeline {
+            position: relative;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: rgba(255, 255, 255, 0.1);
+            top: 0; bottom: 0; left: 50%;
+            margin-left: -2px;
+        }
+
+        .container {
+            padding: 15px 40px;
+            position: relative;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .left { left: 0; text-align: right; }
+        .right { left: 50%; text-align: left; }
+
+        .dot {
+            width: 20px; height: 20px;
+            background: white;
+            border: 4px solid var(--bg-black);
+            border-radius: 50%;
+            position: absolute;
+            top: 25px;
+            z-index: 2;
+            box-shadow: 0 0 10px var(--netflix-red);
+        }
+        .left .dot { right: -10px; }
+        .right .dot { left: -10px; }
+
+        /* --- CARDS --- */
+        .content-card {
+            background: var(--card-grey);
+            padding: 30px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .content-card:hover {
+            transform: scale(1.05);
+            border-color: var(--netflix-red);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+        }
+
+        .swansea-card {
+            border-left: 6px solid var(--swansea-gold);
+            background: linear-gradient(145deg, rgba(133, 3, 3, 0.2), rgba(24, 24, 24, 0.9));
+        }
+
+        .date {
+            display: block;
+            color: var(--text-grey);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .tech-tags {
+            color: var(--netflix-red);
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin: 10px 0;
+        }
+
+        .details {
+            list-style: none;
+            font-size: 0.95rem;
+            color: #d2d2d2;
+            line-height: 1.6;
+        }
+
+        .details li::before {
+            content: "▶ ";
+            color: var(--netflix-red);
+            font-size: 0.8rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar { padding: 15px 20px; }
+            .nav-links { display: none; } /* Hide links on mobile for simplicity */
+            .timeline::after { left: 31px; }
+            .container { width: 100%; padding-left: 70px; text-align: left; }
+            .left .dot, .right .dot { left: 21px; }
+            .right { left: 0%; }
+            body { padding-top: 100px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar" id="mainNav">
+        <a href="#" class="nav-logo">JOHN LORENZO</a>
+        <ul class="nav-links">
+            <li><a href="menu.html">Home</a></li>
+            <li><a href="professional.html">Education</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="hireme.html">Hire Me</a></li>
+        </ul>
+    </nav>
+
+    <section class="experience-section">
+        <div class="section-header">
+            <h1>Experience History</h1>
+        </div>
+
+        <div class="timeline">
+            
+            <div class="container right">
+                <div class="dot" style="background: var(--netflix-red);"></div>
+                <span class="date">JANUARY 2008 - 2013</span>
+                <div class="content-card">
+                    <h3>Grade school (Primary Education)</h3>
+                    <p style="font-weight: 500;">Nazareth Christian school</p>
+                    <p class="tech-tags">MATH • COMPUTER • P.E </p>
+                    <ul class="details">
+                        <li>“I am a hardworking and curious student in grade school who enjoys learning new things every day.”</li>
+                        <li>LOVE MATH, COMPUTER, P.E </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="container left">
+                <div class="dot" style="background: var(--swansea-gold);"></div>
+                <span class="date">JANUARY 2014 - 2018</span>
+                <div class="content-card swansea-card">
+                    <h3 style="color: var(--swansea-gold);">HIGH SCHOOL (Secondary Education)🎓</h3>
+                    <p style="color: var(--text-white); font-weight: bold;">DOYONG MALABAGO NAT. HIGH SCHOOL</p>
+                    <p class="details" style="margin-top: 10px;">
+                        “In high school, I am a driven and creative student who loves exploring new ideas, tackling challenges, and growing both academically and personally.”
+                    </p>
+                </div>
+            </div>
+
+            <div class="container right">
+                <div class="dot" style="background: #fff;"></div>
+                <span class="date">JANUARY 2019 - 2023</span>
+                <div class="content-card">
+                    <h3>COLLEGE</h3>
+                    <p>ICCT COLLEGES</p>
+                    <p class="tech-tags"> CODING • CISCO • HARDWARE </p>
+                    <ul class="details">
+                        <li>“As a college student, I am passionate about learning, developing my skills in coding and problem-solving, and taking on projects that challenge me to grow both academically and professionally.”</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // Timeline Reveal Script
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.container').forEach(c => observer.observe(c));
+
+        // Navbar Scroll Effect Script
+        const nav = document.getElementById('mainNav');
+        window.onscroll = function() {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> johnlorenzo | Portfolio</title>
+    <style>
+        /* --- THEME VARIABLES --- */
+        :root {
+            --netflix-red: #e50914;
+            --bg-black: #141414;
+            --card-grey: #181818;
+            --text-white: #ffffff;
+            --text-grey: #a3a3a3;
+            --netflix-green: #46d369;
+        }
+
+        /* --- RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-black);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: var(--text-white);
+            overflow-x: hidden;
+            line-height: 1.4;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 70px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Pushes profile to the right */
+            padding: 0 4%;
+            transition: background-color 0.5s ease;
+        }
+        nav.scrolled { background-color: #000000; }
+
+        .nav-left { display: flex; align-items: center; }
+
+        .logo {
+            color: var(--netflix-red);
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-right: 30px;
+            letter-spacing: 1px;
+        }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--text-grey); }
+
+        /* --- PROFILE SWITCHER --- */
+        .profile-switcher-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .profile-icon-main {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        /* Downward Arrow */
+        .profile-switcher-container::after {
+            content: '';
+            margin-left: 10px;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid var(--text-white);
+            transition: transform 0.3s;
+        }
+
+        .profile-switcher-container:hover::after {
+            transform: rotate(180deg);
+        }
+
+        /* Dropdown Menu */
+        .profile-dropdown {
+            position: absolute;
+            top: 55px;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            width: 170px;
+            display: none;
+            flex-direction: column;
+            padding: 10px 0;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+        }
+
+        .profile-switcher-container:hover .profile-dropdown {
+            display: flex;
+        }
+
+        .dropdown-profile-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 15px;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text-white);
+            font-size: 0.8rem;
+        }
+
+        .dropdown-profile-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            text-decoration: underline;
+        }
+
+        .dropdown-profile-item img {
+            width: 24px;
+            height: 24px;
+            border-radius: 2px;
+        }
+
+        .dropdown-divider {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 5px 0;
+            padding-top: 5px;
+            text-align: center;
+            font-size: 0.75rem;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 85vh;
+            position: relative;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, var(--bg-black)),
+                        url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGNidDl5emZpejY2eGFxa2I4NW0zZGNpbWRlbnBrZ3N2dWhhbzM1MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/TFPdmm3rdzeZ0kP3zG/giphy.gif');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 0 4%;
+        }
+        .hero-content { max-width: 650px; }
+        .hero-title { font-size: 3.5rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero-desc { font-size: 1.2rem; margin-bottom: 25px; text-shadow: 1px 1px 3px rgba(0,0,0,0.8); }
+
+        .btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: opacity 0.2s;
+            text-decoration: none;
+        }
+        .btn:hover { opacity: 0.8; }
+        .btn-play { background-color: white; color: black; }
+        .btn-info { background-color: rgba(109, 109, 110, 0.7); color: white; }
+
+        /* --- HORIZONTAL ROWS & CARDS --- */
+        .row { padding: 40px 0 20px 4%; }
+        .row-title { font-size: 1.4rem; margin-bottom: 15px; }
+        .row-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scrollbar-width: none;
+        }
+        .row-container::-webkit-scrollbar { display: none; }
+
+        .card {
+            position: relative;
+            min-width: 250px;
+            height: 140px;
+            cursor: pointer;
+            transition: transform 0.4s ease-in-out;
+            transition-delay: 0.1s;
+        }
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .card:hover { transform: scale(1.4); z-index: 500; box-shadow: 0 15px 30px rgba(0,0,0,0.8); }
+
+        .card-info {
+            position: absolute;
+            background: var(--card-grey);
+            width: 100%;
+            padding: 10px;
+            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .card:hover .card-info { opacity: 1; pointer-events: auto; }
+        .match { color: var(--netflix-green); font-weight: bold; font-size: 0.75rem; }
+        .tags { font-size: 0.65rem; color: var(--text-grey); margin-top: 5px; }
+
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-left">
+            <a href="#" class="logo">PORTFOLIO</a>
+            <ul class="nav-links">
+                <li><a href="menu2.html">Home</a></li>
+                <li><a href="hireme2.html">Hire Me</a></li>
+            </ul>
+        </div>
+
+        <div class="profile-switcher-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvW15m_SY-oEMjBgNHZ5LnTbXtRnffH09u2w&s" class="profile-icon-main" alt="Profile">
+            <div class="profile-dropdown">
+                <a href="menu.html" class="dropdown-profile-item">
+                    <img src="https://i.pinimg.com/736x/92/b4/e7/92b4e7c57de1b5e1e8c5e883fd915450.jpg" alt=""> PROFESSOR
+                </a>
+                
+                <div class="dropdown-divider">
+                    <a href="index.html" style="color: white; text-decoration: none;">Manage Profiles</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">John Lorenzo Austria</h1>
+            <p class="hero-desc">
+               Hi! My name is John Lorenzo Austria, and I’m a student with a strong interest in technology and coding. I enjoy learning new programming languages and building small projects that help me apply what I’ve learned in practical ways. I’m curious, detail-oriented, and always eager to improve my skills in coding and problem-solving.
+            </p>
+            <div class="hero-btns">
+                <a href="https://web.facebook.com/johnlorenzo.austria" class="btn btn-play">▶ Resume</a>
+                <a href="https://www.instagram.com/austriajohnlorenzo/" class="btn btn-info">ⓘ More Info</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="row">
+            <h2 class="row-title">Today's Top Projects</h2>
+            <div class="row-container">
+                <a href="https://yohan577.github.io/BELLA-LUNA-RESTAURANT/" target="_blank" class="card-link">
+                    <div class="card">
+                        <img src="https://interiordesign.net/wp-content/uploads/2024/04/InteriorDesign_March2024_Brave-New-World-11-1024x768.jpg" alt="Project A">
+                        <div class="card-info">
+                            <span class="match">98% Match</span>
+                            <p class="tags">HTML • CSS • JAVA</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://yohan577.github.io/SUNSET-COFFEE-SHOP/" target="_blank" class="card-link">
+                    <div class="card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4qP-KWrpfCvGHZXGbOhaWH_-_yfCNGfWfng&s" alt="Project B">
+                        <div class="card-info">
+                            <span class="match">95% Match</span>
+                            <p class="tags">HTML • CSS • JAVA</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const nav = document.getElementById('navbar');
+        window.onscroll = () => {
+            if (window.scrollY > 80) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        };
+    </script>
+
+</body>
+</html>
